@@ -14,6 +14,8 @@
 #define OLED_DC     D3
 #define OLED_CS     D4
 #define OLED_RESET  D5
+#define PHOTO_POWER A5
+#define PHOTO_PIN   A0
 Adafruit_SSD1306 display(OLED_DC, OLED_RESET, OLED_CS);
 
 String level = "";
@@ -25,19 +27,30 @@ void setup() {
     display.setTextSize(2);       // text size
     display.setTextColor(WHITE); // text color
 
+    pinMode(PHOTO_POWER, OUTPUT);
+    pinMode(PHOTO_PIN, INPUT);
+
+    analogWrite(PHOTO_POWER, HIGH);
+
 }
 
 char publishString_WiFiData[40];
+char publishString_PhotoData[40];
 
 
 void loop() {
 
     updateLevel();
-    
+
     int n = -WiFi.RSSI();
     sprintf (publishString_WiFiData,"Wifi Strength is %d.",n);
-    
+
+    int sensorVal = analogRead(PHOTO_PIN);
+    sprintf (pubilshString_PhotoData, "Sensor Value is %d.", sensorVal);
+
     Particle.publish("Wifi Strength", publishString_WiFiData, PRIVATE);
+    Particle.publish("Sensor Value", publishString_PhotoData, PRIVATE);
+
 
     display.clearDisplay();
     display.setCursor(1, 1);
@@ -53,14 +66,14 @@ void loop() {
     display.setTextSize(2);
     display.display();
     delay(500);
-    
+
 }
 
 void updateLevel(){
-   
+
    if((-WiFi.RSSI()) < 20 && (-WiFi.RSSI()) > 0){
        level = "AHH!!!";
-   } 
+   }
    else if((-WiFi.RSSI()) < 40 && (-WiFi.RSSI()) >= 20){
        level = "amazing";
    }
@@ -76,6 +89,6 @@ void updateLevel(){
      else if((-WiFi.RSSI()) >= 100){
        level = "crap";
    }
-   
-   
+
+
 }
