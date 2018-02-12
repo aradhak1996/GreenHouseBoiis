@@ -34,7 +34,7 @@
 
     <script>
       var particle = new Particle();
-      var token = "55e9973b571f594ebc4cc2c2aabff1f1dda8a17f"
+      var token = "f2ce484f72a0eff841562c2bbde240a742e5ecaf";
 
       // particle.login({ username: 'lucaskesselman@gmail.com', password: 'lucas1289' })
       // .then(function(result) {
@@ -45,7 +45,7 @@
 
       console.log("ayo");
 
-      particle.getEventStream({ deviceId: '42005f001051353338363333', auth: token }).then(function(stream) {
+      particle.getEventStream({ deviceId: '52003d000c51353432383931', auth: token }).then(function(stream) {
         stream.on('Wifi Strength', function(data) {
 
           console.log("yo");
