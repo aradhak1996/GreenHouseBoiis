@@ -48,11 +48,22 @@
       particle.getEventStream({ deviceId: '52003d000c51353432383931', auth: token }).then(function(stream) {
         stream.on('Wifi Strength', function(data) {
 
-          console.log("yo");
-
-          console.log("Event: ", data);
+        
           document.getElementById("wifiID").innerHTML = data.data;
-          console.log("after");
+     
+
+
+        });
+      });
+
+      particle.getEventStream({ deviceId: '42005f001051353338363333', auth: token }).then(function(stream) {
+        stream.on('Photo Strength', function(data) {
+
+  
+
+    
+          document.getElementById("photoID").innerHTML = data.data;
+          
 
 
         });
@@ -60,5 +71,6 @@
     </script>
 
     <p id="wifiID"> Strength is: </p>
+    <p id="photoID"> Photo is: </p>
   </body>
   </html>
