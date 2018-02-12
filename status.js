@@ -1,36 +1,28 @@
-
-var Particle = require('particle-api-js');
 var particle = new Particle();
-var token;
+      var token = "55e9973b571f594ebc4cc2c2aabff1f1dda8a17f";
 
-particle.login({username: 'lucaskesselman@gmail', password: 'lucas1289'}).then(
-  function(data) {
-    token = data.body.access_token;
-  },
-  function (err) {
-    console.log('Could not log in.', err);
-  }
-);
+      console.log("Page Running");
 
-// particle.getEventStream({ auth: token}).then(function(stream) {
-//   stream.on('Wifi Strength', function(data) {
+      particle.getEventStream({ deviceId: '42005f001051353338363333', auth: token }).then(function(stream) {
+        stream.on('Temperature', function(data) {
+
+        
+          document.getElementById("TempID").innerHTML = data.data;
+     
+
+
+        });
+      });
+
+      particle.getEventStream({ deviceId: '42005f001051353338363333', auth: token }).then(function(stream) {
+        stream.on('Photoresistor Reading', function(data) {
+
+  
+
     
-
-//     console.log("Wifi Strength: ", data);
-
-//     document.getElementByID('wifiID').innerHTML = data;
+          document.getElementById("photoID").innerHTML = data.data;
+          
 
 
-//   });
-// });
-
-particle.getEventStream({ deviceId: '42005f001051353338363333', name: 'InternetOfSeamus', auth: token }).then(function(stream) {
-  stream.on('Wifi Strength', function(data) {
-
-
-    console.log("Event: ", data);
-	document.getElementByID('wifiID').innerHTML = data;
-
-
-  });
-});
+        });
+      });

@@ -1,76 +1,80 @@
-<!-- <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <script type="text/javascript" src="//cdn.jsdelivr.net/particle-api-js/5/particle.min.js"></script>
-    <script src="status.js"> </script>
-  
-    <title>Manage Plant</title>
-  </head>
-  <body>
-    <h1>Manage Plant</h1>
 
-    <br>
-    <h3>Plant ID: 234123</h3>
-    <h3>Wifi Strength</h3>
-    <p id="wifiID"></p>
-    <h3>Brightness:</h3>
-    <p id="BrightnessID"></p>
-    <h3>Water:</h3>
-    <p id="WaterID"></p>
-    
-  </body>
-  </html> -->
 
 <!DOCTYPE html>
   <html>
 
   <head>
-    <title>Particle Login Example</title>
+    <title>Sensor Readings</title>
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="styles.css">
   </head>
 
   <body>
+
     <script src="https://cdn.jsdelivr.net/particle-api-js/5/particle.min.js"></script>
 
-    <script>
-      var particle = new Particle();
-      var token = "f2ce484f72a0eff841562c2bbde240a742e5ecaf";
+    <nav class="navbar navbar-default">
+    <div class="container-fluid">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">GreenHouse Boiis</a>
+      </div>
 
-      // particle.login({ username: 'lucaskesselman@gmail.com', password: 'lucas1289' })
-      // .then(function(result) {
-      //   console.log('Your access token', result.body.access_token);
-      // }, function(err) {
-      //   console.error(err);
-      // });
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+          <li><a href="#">About</a></li>
+          <li class="Services">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Plants <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><a href="#">Plant 1</a></li>
+              <li><a href="#">Plant 2</a></li>
+              <li><a href="#">Plant 3</a></li>
+              <li role="separator" class="divider"></li>
+              <li><a href="#">Manage Plants</a></li>
+            </ul>
+          </li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="#">Link</a></li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Services <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><a href="#">Action</a></li>
+              <li><a href="#">Another action</a></li>
+              <li><a href="#">Something else here</a></li>
+              <li role="separator" class="divider"></li>
+              <li><a href="#">Separated link</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+  </nav>
 
-      console.log("ayo");
+    <div class="container">
 
-      particle.getEventStream({ deviceId: '52003d000c51353432383931', auth: token }).then(function(stream) {
-        stream.on('Wifi Strength', function(data) {
-
-        
-          document.getElementById("wifiID").innerHTML = data.data;
-     
-
-
-        });
-      });
-
-      particle.getEventStream({ deviceId: '42005f001051353338363333', auth: token }).then(function(stream) {
-        stream.on('Photo Strength', function(data) {
-
-  
+      <div class="jumbotron">
+    
+        <h1>Sensor Readings</h1>
+        <p> Temperature: <span id="TempID">0</span> degrees fahrenheit</p>
+        <p> Photoresistor reading is: <span id="photoID">0</span> </p>
+      </div>
+    </div>
+    
 
     
-          document.getElementById("photoID").innerHTML = data.data;
-          
 
+    <script type="text/javascript" src="status.js"></script>
+    
+    <script src="https://code.jquery.com/jquery-2.1.4.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 
-        });
-      });
-    </script>
-
-    <p id="wifiID"> Strength is: </p>
-    <p id="photoID"> Photo is: </p>
   </body>
   </html>
