@@ -12,12 +12,21 @@ float lastTemp;
 int photoPin = A2;
 int photoPower = A4;
 
+int val = 0; //value for storing moisture value
+int soilPin = A2;//Declare a variable for the soil moisture sensor
+int soilPower = D0;//Variable for Soil moisture Power
+
 void setup() {
-    
+
+    Serial.begin(9600);
+
     pinMode(photoPin, INPUT);
     pinMode(photoPower, OUTPUT);
     analogWrite(photoPower, HIGH);
-    
+
+    pinMode(soilPower, OUTPUT);//Set D7 as an OUTPUT
+    digitalWrite(soilPower, HIGH);
+
 
 }
 
@@ -31,11 +40,17 @@ void loop(void) {
   byte data[12];
   byte addr[8];
   float celsius, fahrenheit;
-  
+
+  Serial.print("Soil Moisture = ");
+  Serial.println(readSoil());
+  delay(1000);
+
   //Read from the Photoresistor Pin
-  
+
   int photoRaw = analogRead(photoPin);
   String photoPublish = String(photoRaw);
+
+
 
   if ( !ds.search(addr)) {
     ds.reset_search();
@@ -44,7 +59,7 @@ void loop(void) {
   }
 
   if (OneWire::crc8(addr, 7) != addr[7]) {
-      
+
       return;
   }
 
@@ -82,7 +97,7 @@ void loop(void) {
   for ( i = 0; i < 9; i++) {           // we need 9 bytes
     data[i] = ds.read();
   }
-  
+
   int16_t raw = (data[1] << 8) | data[0];
   if (type_s == 2) raw = (data[2] << 8) | data[1];
   byte cfg = (data[4] & 0x60);
@@ -128,4 +143,15 @@ void loop(void) {
   Particle.publish("Temperature", temperature, PRIVATE); // publish to cloud
   Particle.publish("Photoresistor Reading", photoPublish, PRIVATE);
   delay(2000); // 5 second delay
+}
+
+
+int readSoil()
+{
+
+    digitalWrite(soilPower, HIGH);//turn D7 "On"
+    delay(10);//wait 10 milliseconds
+    val = analogRead(soilPin);//Read the SIG value form sensor
+    digitalWrite(soilPower, LOW);//turn D7 "Off"
+    return val;//send current moisture value
 }
