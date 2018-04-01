@@ -5,7 +5,6 @@ var particle = new Particle();
 
       particle.getEventStream({ deviceId: '42005f001051353338363333', auth: token }).then(function(stream) {
         stream.on('Temperature', function(data) {
-
         
           document.getElementById("TempID").innerHTML = data.data;
      
