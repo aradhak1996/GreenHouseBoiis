@@ -16,10 +16,6 @@ int val = 0; //value for storing moisture value
 int soilPin = A2;//Declare a variable for the soil moisture sensor
 int soilPower = D0;//Variable for Soil moisture Power
 
-int valvePin = D4;
-
-
-
 void setup() {
 
     Serial.begin(9600);
@@ -30,10 +26,6 @@ void setup() {
 
     pinMode(soilPower, OUTPUT);//Set D7 as an OUTPUT
     digitalWrite(soilPower, HIGH);
-
-    Particle.function("actuate", toggleValve);
-
-    digitalWrite(valvePin, LOW);
 
 
 }
@@ -151,11 +143,6 @@ void loop(void) {
   Particle.publish("Temperature", temperature, PRIVATE); // publish to cloud
   Particle.publish("Photoresistor Reading", photoPublish, PRIVATE);
   delay(2000); // 5 second delay
-}
-
-int toggleValve(String dummy){
-  currState = digitalRead(valvePin);
-  digitalWrite(valvePin, !currState);
 }
 
 

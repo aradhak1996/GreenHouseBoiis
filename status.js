@@ -26,3 +26,26 @@ var particle = new Particle();
 
         });
       });
+
+      var dangerButton = document.getElementById("dangerbutton");
+      dangerButton.addEventListener("click", actuate);
+
+      var functionData = {
+        deviceId: '42005f001051353338363333',
+        name: "actuate",
+        argument: "",
+        auth: token
+      }
+
+      function onSuccess(){
+        console.log("actuate success");
+      }
+
+      function onFailure(){
+        console.log("get fucked");
+      }
+
+      function actuate(){
+        particle.callFunction(functionData).then(onSuccess, onFailure); 
+        console.log("button click");
+      }
