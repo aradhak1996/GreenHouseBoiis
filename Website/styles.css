@@ -1,0 +1,13 @@
+
+.jumbotron {
+	margin-top: 100px;
+}
+
+body {
+	background: #7b8c73;
+}
+
+.btn-danger {
+	width: 200px;
+	height: 150px;
+}

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+  <html>
+
+  <head>
+    <title>Sensor Readings</title>
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <link rel="shortcut icon" href="Drawing.png.ico"/>
+  </head>
+
+  <body>
+
+    <script src="https://cdn.jsdelivr.net/particle-api-js/5/particle.min.js"></script>
+
+    <div class="container">
+      <div class="jumbotron">
+        <h2>Solenoid Valve</h2>
+        <p id="labelTemp"> Temperature: <span id="TempID">loading...</span> degrees fahrenheit</p>
+        <p id="labelPhoto"> Photoresistor reading is: <span id="photoID">loading...</span> </p>
+        <p id="labelValve"> Valve is: <span id="status">loading...</span></p>
+        <button type="button" class="btn btn-danger" id="openButton">Open</button>
+        <button type="button" class="btn btn-danger" id="closeButton">Close</button>
+      </div>
+    </div>
+    
+    <script type="text/javascript" src="status.js"></script>
+    
+
+    <script src="https://code.jquery.com/jquery-2.1.4.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+  </body>
+  </html>
